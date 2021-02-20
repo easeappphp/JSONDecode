@@ -1,0 +1,26 @@
+{
+    "name": "easeappphp/json-decode",
+    "description": "This is to do json_decode operation only on valid json string and in a highly performing way.",
+	"keywords": ["php", "json_decode", "php object", "php array", "json string"],
+    "homepage": "https://www.easeapp.org/",
+    "type": "library",
+	"require": {
+        "php": ">=7.3"
+    },
+	"require-dev": {
+        "php": ">=7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raghuveer Dendukuri",
+            "email": "raghuveer.dendukuri@gmail.com"
+        }
+    ],
+	"autoload": {
+       
+	   "psr-4": {
+            "EaseAppPHP\\JSONDecode\\": "src/"
+        }
+    }
+}
