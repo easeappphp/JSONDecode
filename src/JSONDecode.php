@@ -72,7 +72,7 @@ class JSONDecode {
 	}
 	
 	/**
-	 * Returns if the input is a valid JSON string along with  type, when the given parameter is a valid JSON string.
+	 * Returns if the input is a valid JSON string along with content in chosen data type (array or object), when the given input is a valid JSON string.
 	 */
 	public function getJsonDecodedData($value, bool $asArray) {
 		
