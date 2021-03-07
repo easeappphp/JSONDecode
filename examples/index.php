@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 use \EaseAppPHP\JSONDecode\JSONDecode;
 
 $jsonDecode = new JSONDecode();
-
+/* 
 //$isJsonCheckInput = "{ 'bar': 'baz' }"; // bool(false)
 
 //$isJsonCheckInput = '{ bar: "baz" }'; // bool(false)
@@ -86,6 +86,6 @@ if (($receivedData["is_json"] === true) && ($receivedData["content"] != "")) {
 	
 }
 echo "<br>";
-
+ */
 
 ?>

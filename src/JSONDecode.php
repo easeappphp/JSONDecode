@@ -57,7 +57,7 @@ class JSONDecode {
 			
 		} catch(JSONDecodeException $e) {
 			
-		  echo "\n JSONDecodeException - ", htmlspecialchars($e->getMessage(), ENT_QUOTES), (int)$e->getCode();
+		  echo htmlspecialchars("\n JSONDecodeException - ", $e->getMessage(), (int)$e->getCode(), ENT_QUOTES);
 		  
 		}
 		
@@ -117,7 +117,7 @@ class JSONDecode {
 			
 		} catch(JSONDecodeException $e) {
 			
-		  echo "\n JSONDecodeException - ", htmlspecialchars($e->getMessage(), ENT_QUOTES), (int)$e->getCode();
+		  echo htmlspecialchars("\n JSONDecodeException - ", $e->getMessage(), (int)$e->getCode(), ENT_QUOTES);
 		  
 		}
 		
