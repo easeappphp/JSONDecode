@@ -1,10 +1,10 @@
 <?php
-require 'vendor/autoload.php';
+/*require 'vendor/autoload.php';
 
 use \EaseAppPHP\JSONDecode\JSONDecode;
 
 $jsonDecode = new JSONDecode();
-/* 
+ 
 //$isJsonCheckInput = "{ 'bar': 'baz' }"; // bool(false)
 
 //$isJsonCheckInput = '{ bar: "baz" }'; // bool(false)

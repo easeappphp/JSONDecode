@@ -36,7 +36,7 @@ class JSONDecode {
 				return false;
 				
 			}
-			
+			is_string($b) ? 'true' : 'false'
 			/**
 			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
 			 */
@@ -127,7 +127,7 @@ class JSONDecode {
 			/**
 			 * A non-string value is never a Valid JSON string.
 			 */
-			if (!is_string($value)) {
+			if ($this->isInputString($value) === false) {
 				
 				return $response;
 				
@@ -136,7 +136,7 @@ class JSONDecode {
 			/**
 			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
 			 */
-			if (is_numeric($value)) { 
+			if ($this->isInputNumber($value) === false) { 
 				
 				return $response;
 				
@@ -212,7 +212,23 @@ class JSONDecode {
 	}
 	
 	/**
-	 * Returns JSon Decoded data
+	 * Returns if input value is a string
+	 */
+	private function isInputString($jsonString) : bool
+    {
+        return is_string($jsonString) ? true : false;
+    }
+	
+	/**
+	 * Returns if input value is a Number/Numeric String
+	 */
+	private function isInputNumber($jsonString) : bool
+    {
+        return is_numeric($jsonString) ? true : false;
+    }
+	
+	/**
+	 * Returns JSON Decoded data
 	 */
 	private function jsonDecodeData($jsonString, bool $asArray) {
 		
