@@ -240,7 +240,7 @@ class JSONDecode {
 	 */
 	private function isInputNull($jsonString) : bool
     {
-        return 'null' === $value ? true : false;
+        return 'null' === $$jsonString ? true : false;
     }
 	
 	/**
@@ -248,7 +248,7 @@ class JSONDecode {
 	 */
 	private function isInputTextTrue($jsonString) : bool
     {
-        return 'true' === $value ? true : false;
+        return 'true' === $jsonString ? true : false;
     }
 	
 	/**
@@ -256,7 +256,7 @@ class JSONDecode {
 	 */
 	private function isInputTextFalse($jsonString) : bool
     {
-        return 'false' === $value ? true : false;
+        return 'false' === $jsonString ? true : false;
     }
 	
 	
@@ -265,7 +265,7 @@ class JSONDecode {
 	 */
 	private function doesInputHasJsonSymbols($jsonString) : bool
     {
-        return '{' != $value[0] && '[' != $value[0] && '"' != $value[0] ? true : false;
+        return '{' != $jsonString[0] && '[' != $jsonString[0] && '"' != $jsonString[0] ? true : false;
     }
 	
 	/**
