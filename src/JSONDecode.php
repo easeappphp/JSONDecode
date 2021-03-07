@@ -31,25 +31,25 @@ class JSONDecode {
 			/**
 			 * A non-string value is never a Valid JSON string.
 			 */
-			if (!is_string($value)) {
+			if ($this->isInputString($value) === false) {
 				
 				return false;
 				
 			}
-			is_string($b) ? 'true' : 'false'
+			
 			/**
 			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
 			 */
-			if (is_numeric($value)) { 
+			if ($this->isInputNumber($value) === false) { 
 				
-				return false; 
+				return false;
 				
 			}
 			
 			/**
 			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
 			 */
-			if (mb_strlen($value) < 2) { 
+			if ($this->isInputLength($value) === false) { 
 				
 				return false;
 				
@@ -58,7 +58,7 @@ class JSONDecode {
 			/**
 			 * "null" is never a valid JSON string.
 			 */
-			if ('null' === $value) { 
+			if ($this->isInputNull($value) === false) { 
 				
 				return false;
 				
@@ -67,7 +67,7 @@ class JSONDecode {
 			/**
 			 * "true" is never a valid JSON string.
 			 */
-			if ('true' === $value) { 
+			if ($this->isInputTextTrue($value) === false) { 
 				
 				return false;
 				
@@ -76,7 +76,7 @@ class JSONDecode {
 			/**
 			 * "false" is never a valid JSON string.
 			 */
-			if ('false' === $value) { 
+			if ($this->isInputTextFalse($value) === false) { 
 				
 				return false;
 				
@@ -85,7 +85,7 @@ class JSONDecode {
 			/**
 			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
 			 */
-			if ('{' != $value[0] && '[' != $value[0] && '"' != $value[0]) { 
+			if ($this->doesInputHasJsonSymbols($value) === false) { 
 				
 				return false;
 				
@@ -145,7 +145,7 @@ class JSONDecode {
 			/**
 			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
 			 */
-			if (mb_strlen($value) < 2) { 
+			if ($this->isInputLength($value) === false) { 
 				
 				return $response;
 				
@@ -154,7 +154,7 @@ class JSONDecode {
 			/**
 			 * "null" is never a valid JSON string.
 			 */
-			if ('null' === $value) { 
+			if ($this->isInputNull($value) === false) { 
 				
 				return $response;
 				
@@ -163,7 +163,7 @@ class JSONDecode {
 			/**
 			 * "true" is never a valid JSON string.
 			 */
-			if ('true' === $value) { 
+			if ($this->isInputTextTrue($value) === false) { 
 				
 				return $response;
 				
@@ -172,7 +172,7 @@ class JSONDecode {
 			/**
 			 * "false" is never a valid JSON string.
 			 */
-			if ('false' === $value) { 
+			if ($this->isInputTextFalse($value) === false) { 
 				
 				return $response;
 				
@@ -181,7 +181,7 @@ class JSONDecode {
 			/**
 			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
 			 */
-			if ('{' != $value[0] && '[' != $value[0] && '"' != $value[0]) { 
+			if ($this->doesInputHasJsonSymbols($value) === false) { 
 				
 				return $response;
 				
@@ -212,7 +212,7 @@ class JSONDecode {
 	}
 	
 	/**
-	 * Returns if input value is a string
+	 * Checks if input value is a string
 	 */
 	private function isInputString($jsonString) : bool
     {
@@ -220,11 +220,52 @@ class JSONDecode {
     }
 	
 	/**
-	 * Returns if input value is a Number/Numeric String
+	 * Checks if input value is a Number/Numeric String
 	 */
 	private function isInputNumber($jsonString) : bool
     {
         return is_numeric($jsonString) ? true : false;
+    }
+	
+	/**
+	 * Checks if input value length
+	 */
+	private function isInputLength($jsonString) : bool
+    {
+        return mb_strlen($jsonString) < 2 ? true : false;
+    }
+	
+	/**
+	 * Checks if input value is NULL
+	 */
+	private function isInputNull($jsonString) : bool
+    {
+        return 'null' === $value ? true : false;
+    }
+	
+	/**
+	 * Checks if input value is string true
+	 */
+	private function isInputTextTrue($jsonString) : bool
+    {
+        return 'true' === $value ? true : false;
+    }
+	
+	/**
+	 * Checks if input value is string false
+	 */
+	private function isInputTextFalse($jsonString) : bool
+    {
+        return 'false' === $value ? true : false;
+    }
+	
+	
+	/**
+	 * Checks if input value has JSON Starting and Ending Symbols
+	 */
+	private function doesInputHasJsonSymbols($jsonString) : bool
+    {
+        return '{' != $value[0] && '[' != $value[0] && '"' != $value[0] ? true : false;
     }
 	
 	/**
