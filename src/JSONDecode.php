@@ -29,23 +29,72 @@ class JSONDecode {
 		try {
 			
 			/**
-			 * Considerations
 			 * A non-string value is never a Valid JSON string.
-			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
-			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
-			 * "null" is never a valid JSON string.
-			 * "true" is never a valid JSON string.
-			 * "false" is never a valid JSON string.
-			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
 			 */
-			if ((!is_string($value)) || (is_numeric($value)) || (mb_strlen($value) < 2) || ('null' === $value) || ('true' === $value) || ('false' === $value) || ('{' != $value[0] && '[' != $value[0] && '"' != $value[0])) {
+			if (!is_string($value)) {
 				
 				return false;
 				
 			}
 			
-			//Actual JSON Decode operation using php's inbuilt json_decode function.
-			$json = json_decode($value);
+			/**
+			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
+			 */
+			if (is_numeric($value)) { 
+				
+				return false; 
+				
+			}
+			
+			/**
+			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
+			 */
+			if (mb_strlen($value) < 2) { 
+				
+				return false;
+				
+			}
+			
+			/**
+			 * "null" is never a valid JSON string.
+			 */
+			if ('null' === $value) { 
+				
+				return false;
+				
+			}
+			
+			/**
+			 * "true" is never a valid JSON string.
+			 */
+			if ('true' === $value) { 
+				
+				return false;
+				
+			}
+			
+			/**
+			 * "false" is never a valid JSON string.
+			 */
+			if ('false' === $value) { 
+				
+				return false;
+				
+			}
+			
+			/**
+			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
+			 */
+			if ('{' != $value[0] && '[' != $value[0] && '"' != $value[0]) { 
+				
+				return false;
+				
+			}
+			
+			/**
+			 * Actual JSON Decode operation using php's inbuilt json_decode function.
+			 */
+			$json = $this->jsonDecodeData($value, false);
 			
 			if (($json !== false) && ($json !== null) && ($value != $json)) {
 				
@@ -76,31 +125,72 @@ class JSONDecode {
 			$response["content"] = "";
 				
 			/**
-			 * Considerations
 			 * A non-string value is never a Valid JSON string.
-			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
-			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
-			 * "null" is never a valid JSON string.
-			 * "true" is never a valid JSON string.
-			 * "false" is never a valid JSON string.
-			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
 			 */
-			if ((!is_string($value)) || (is_numeric($value)) || (mb_strlen($value) < 2) || ('null' === $value) || ('true' === $value) || ('false' === $value) || ('{' != $value[0] && '[' != $value[0] && '"' != $value[0])) {
+			if (!is_string($value)) {
 				
 				return $response;
 				
 			}
 			
-			//Actual JSON Decode operation using php's inbuilt json_decode function.				
-			if ($asArray === true) {
+			/**
+			 * A numeric string in double quotes that is encapsulated in single quotes is a valid JSON string. Anything else is never a Valid JSON string.
+			 */
+			if (is_numeric($value)) { 
 				
-				$json = json_decode($value, true);
-				
-			} else {
-				
-				$json = json_decode($value);
+				return $response;
 				
 			}
+			
+			/**
+			 * Any non-numeric JSON string must be longer than 2 characters, or else, it cannot be considered for next level of JSON string validation checks.
+			 */
+			if (mb_strlen($value) < 2) { 
+				
+				return $response;
+				
+			}
+			
+			/**
+			 * "null" is never a valid JSON string.
+			 */
+			if ('null' === $value) { 
+				
+				return $response;
+				
+			}
+			
+			/**
+			 * "true" is never a valid JSON string.
+			 */
+			if ('true' === $value) { 
+				
+				return $response;
+				
+			}
+			
+			/**
+			 * "false" is never a valid JSON string.
+			 */
+			if ('false' === $value) { 
+				
+				return $response;
+				
+			}
+			
+			/**
+			 * Every JSON string has to be wrapped in {}, [] or "", if it is not, then that is never a Valid JSON string.
+			 */
+			if ('{' != $value[0] && '[' != $value[0] && '"' != $value[0]) { 
+				
+				return $response;
+				
+			}
+			
+			/**
+			 * Actual JSON Decode operation using php's inbuilt json_decode function.
+			 */
+			$json = $this->jsonDecodeData($value, $asArray);
 			
 			if (($json !== false) && ($json !== null) && ($value != $json)) {
 				
@@ -109,7 +199,36 @@ class JSONDecode {
 				
 				return $response;
 				
-			} else {
+			}
+				
+			return $response;
+			
+		} catch(JSONDecodeException $e) {
+			
+		  echo htmlspecialchars("\n JSONDecodeException - ", $e->getMessage(), (int)$e->getCode(), ENT_QUOTES);
+		  
+		}
+		
+	}
+	
+	/**
+	 * Returns JSon Decoded data
+	 */
+	private function jsonDecodeData($jsonString, bool $asArray) {
+		
+		try {
+			
+			if ($asArray === true) {
+				
+				$response = json_decode($jsonString, true);
+				
+				return $response;
+				
+			}
+
+			if ($asArray === false) {
+				
+				$response = json_decode($jsonString);
 				
 				return $response;
 				
