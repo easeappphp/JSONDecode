@@ -11,13 +11,13 @@ use \EaseAppPHP\JSONDecode\Exceptions\JSONDecodeException;
 *
 * Author: Raghuveer Dendukuri
 *
-* Version: 1.0.2
+* Version: 1.0.3
 *
 * Description: This is to do json_decode operation only on valid json string and in a highly performing way.
 *
 * License: MIT
 *
-* @copyright 2021 Raghuveer Dendukuri
+* @copyright 2023 Raghuveer Dendukuri
 */
 
 class JSONDecode {

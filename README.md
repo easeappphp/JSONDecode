@@ -8,5 +8,13 @@ Inspired from discussion that I came across on a stackoverflow thread, specifica
   
 and implemented this library, to check if an input is a valid JSON string and likewise to also provide the json decoded content (array or object), as per choice, and when using specific methods for the purpose. More example inputs are considered, to make the implementation more robust while offer good performance. Benchmarks are yet to be made.
 
+
+### Getting started
+With Composer, run
+
+```sh
+composer require easeappphp/json-decode :^1.0.3
+```
+
 ## License
 This software is distributed under the [MIT](https://opensource.org/licenses/MIT) license. Please read [LICENSE](https://github.com/easeappphp/PDOLight/blob/main/LICENSE) for information on the software availability and distribution.
